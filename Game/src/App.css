@@ -1,42 +1,144 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: system-ui, -apple-system, sans-serif;
+  background-color: #f0f4f8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.game-container {
+  display: flex;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 600px;
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.game-board {
+  flex: 1;
+  padding-right: 20px;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+h1 {
+  font-size: 24px;
+  margin-bottom: 10px;
+  color: #333;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.status {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: #666;
 }
 
-.card {
-  padding: 2em;
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, 60px);
+  gap: 5px;
+  margin-bottom: 20px;
 }
 
-.read-the-docs {
-  color: #888;
+.square {
+  width: 60px;
+  height: 60px;
+  border: 2px solid #ddd;
+  font-size: 24px;
+  font-weight: bold;
+  background: white;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.square:hover {
+  background: #f5f5f5;
+}
+
+.square.x {
+  color: #1e90ff;
+}
+
+.square.o {
+  color: #ff4500;
+}
+
+.restart-btn {
+  background-color: #ff4040;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.restart-btn:hover {
+  background-color: #e03a3a;
+}
+
+.history {
+  flex: 1;
+  margin-top: 0;
+  text-align: left;
+  max-width: 200px;
+}
+
+.history h2 {
+  font-size: 18px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.history-list {
+  list-style: none;
+}
+
+.history-item {
+  padding: 5px 10px;
+  background: #f0f0f0;
+  margin-bottom: 5px;
+  border-radius: 5px;
+}
+
+.history-item.current {
+  background: #1e90ff;
+  color: white;
+}
+
+.history-item button {
+  background: none;
+  border: none;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+}
+
+.history-item button:hover {
+  background: #e0e0e0;
+}
+
+.sort-btn {
+  background-color: #8a4af3;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  float: right;
+}
+
+.sort-btn:hover {
+  background-color: #7a3ae3;
 }
