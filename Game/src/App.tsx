@@ -4,7 +4,6 @@ import './App.css';
 function Square({ value, onSquareClick, isWinning }: { value: string | null; onSquareClick: () => void; isWinning: boolean }) {
   return (
     <button
-      // Thay thế 'bg-yellow-200' bằng 'winning'
       className={`square ${value === 'X' ? 'x' : value === 'O' ? 'o' : ''} ${isWinning ? 'winning' : ''}`}
       onClick={onSquareClick}
     >
@@ -39,7 +38,6 @@ function Board({ xIsNext, squares, onPlay, winningLine }: { xIsNext: boolean; sq
         </div>
       ))}
     </div>
-
   );
 }
 
@@ -79,21 +77,19 @@ export default function App() {
     ? 'Draw! No one wins.'
     : `Next player: ${xIsNext ? 'X' : 'O'}`;
 
+  // Tạo trạng thái hiện tại cố định
+  const currentPosition = history[currentMove].position;
+  const currentStatus = `You are at move #${currentMove}${currentPosition !== null ? ` (${Math.floor(currentPosition / 3) + 1}, ${(currentPosition % 3) + 1})` : ''}`;
+
+  // Tạo danh sách lịch sử, không bao gồm trạng thái hiện tại
   const moves = history.map((step, move) => {
     let description: string;
     let position = step.position !== null ? ` (${Math.floor(step.position / 3) + 1}, ${(step.position % 3) + 1})` : '';
 
-    if (move === currentMove) {
-      description = `You are at move #${move}${position}`;
-      return (
-        <li key={move} className="history-item current">
-          {description}
-        </li>
-      );
-    } else if (move > 0) {
-      description = `Go to move #${move}${position}`;
-    } else {
+    if (move === 0) {
       description = 'Go to game start';
+    } else {
+      description = `Go to move #${move}${position}`;
     }
 
     return (
@@ -116,6 +112,7 @@ export default function App() {
               {isAscending ? '↓ Desc' : '↑ Asc'}
             </button>
           </div>
+          <div className="current-status">{currentStatus}</div>
           <ol className="history-list">{displayMoves}</ol>
         </div>
         <div className="game-container">
