@@ -100,9 +100,9 @@ export default function App() {
   const displayMoves = isAscending ? moves : moves.slice().reverse();
 
   return (
-    <div className="game-container">
-      <div className="history">
-        <div>
+    <div className="app-container">
+      <div className="history-container">
+        <div className="history-header">
           <h2>History</h2>
           <button className="sort-btn" onClick={() => setIsAscending(!isAscending)}>
             {isAscending ? '↓ Desc' : '↑ Asc'}
@@ -110,15 +110,17 @@ export default function App() {
         </div>
         <ol className="history-list">{displayMoves}</ol>
       </div>
-      <div className="game-board">
-        <h1>Tic-Tac-Toe Game</h1>
-        <div className="status">{`Next player: ${xIsNext ? 'X' : 'O'}`}</div>
-        <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} winningLine={winningLine} />
-        <button className="restart-btn" onClick={restartGame}>
-          Restart Game
-        </button>
-        <div className="text-sm text-gray-600 mt-2">
-          Click on squares to play • Use history to jump to previous moves
+      <div className="game-container">
+        <div className="game-board">
+          <h1>Tic-Tac-Toe Game</h1>
+          <div className="status">{`Next player: ${xIsNext ? 'X' : 'O'}`}</div>
+          <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} winningLine={winningLine} />
+          <button className="restart-btn" onClick={restartGame}>
+            Restart Game
+          </button>
+          <div className="text-sm text-gray-600 mt-2">
+            Click on squares to play • Use history to jump to previous moves
+          </div>
         </div>
       </div>
     </div>
