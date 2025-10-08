@@ -172,3 +172,9 @@ body {
 .sort-btn:hover {
   background-color: #7a3ae3;
 }
+
+/* Thêm CSS để highlight ô thắng */
+.square.winning {
+  background-color: #ffeb3b; /* Màu vàng nổi bật */
+  opacity: 0.9;
+}

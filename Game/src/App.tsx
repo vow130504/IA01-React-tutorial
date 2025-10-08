@@ -4,7 +4,8 @@ import './App.css';
 function Square({ value, onSquareClick, isWinning }: { value: string | null; onSquareClick: () => void; isWinning: boolean }) {
   return (
     <button
-      className={`square ${value === 'X' ? 'x' : value === 'O' ? 'o' : ''} ${isWinning ? 'bg-yellow-200' : ''}`}
+      // Thay thế 'bg-yellow-200' bằng 'winning'
+      className={`square ${value === 'X' ? 'x' : value === 'O' ? 'o' : ''} ${isWinning ? 'winning' : ''}`}
       onClick={onSquareClick}
     >
       {value}
@@ -20,26 +21,25 @@ function Board({ xIsNext, squares, onPlay, winningLine }: { xIsNext: boolean; sq
     onPlay(nextSquares, i);
   }
 
-  const winner = calculateWinner(squares);
-  const status = winner
-    ? `Winner: ${winner}`
-    : squares.every((square) => square !== null)
-    ? 'Draw! No one wins.'
-    : `Next player: ${xIsNext ? 'X' : 'O'}`;
-
   return (
     <div className="board">
-      {Array(9)
-        .fill(null)
-        .map((_, i) => (
-          <Square
-            key={i}
-            value={squares[i]}
-            onSquareClick={() => handleClick(i)}
-            isWinning={winningLine?.includes(i) || false}
-          />
-        ))}
+      {Array(3).fill(null).map((_, row) => (
+        <div key={row} className="board-row">
+          {Array(3).fill(null).map((_, col) => {
+            const index = row * 3 + col;
+            return (
+              <Square
+                key={index}
+                value={squares[index]}
+                onSquareClick={() => handleClick(index)}
+                isWinning={winningLine?.includes(index) || false}
+              />
+            );
+          })}
+        </div>
+      ))}
     </div>
+
   );
 }
 
@@ -72,6 +72,12 @@ export default function App() {
 
   const winnerInfo = calculateWinner(currentSquares);
   const winningLine = winnerInfo ? getWinningLine(currentSquares) : null;
+  const isDraw = !winnerInfo && currentSquares.every((square) => square !== null);
+  const status = winnerInfo
+    ? `Winner: ${winnerInfo}`
+    : isDraw
+    ? 'Draw! No one wins.'
+    : `Next player: ${xIsNext ? 'X' : 'O'}`;
 
   const moves = history.map((step, move) => {
     let description: string;
@@ -114,7 +120,7 @@ export default function App() {
         </div>
         <div className="game-container">
           <div className="game-board">
-            <div className="status">{`Next player: ${xIsNext ? 'X' : 'O'}`}</div>
+            <div className="status">{status}</div>
             <div className="board-wrapper">
               <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} winningLine={winningLine} />
             </div>
