@@ -77,6 +77,13 @@ export default function App() {
     ? 'Draw! No one wins.'
     : `Next player: ${xIsNext ? 'X' : 'O'}`;
 
+  // Xác định lớp CSS cho trạng thái
+  const statusClass = winnerInfo
+    ? `status status-winner-${winnerInfo.toLowerCase()}`
+    : isDraw
+    ? 'status status-draw'
+    : 'status';
+
   // Tạo trạng thái hiện tại cố định
   const currentPosition = history[currentMove].position;
   const currentStatus = `You are at move #${currentMove}${currentPosition !== null ? ` (${Math.floor(currentPosition / 3) + 1}, ${(currentPosition % 3) + 1})` : ''}`;
@@ -117,7 +124,7 @@ export default function App() {
         </div>
         <div className="game-container">
           <div className="game-board">
-            <div className="status">{status}</div>
+            <div className={statusClass}>{status}</div>
             <div className="board-wrapper">
               <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} winningLine={winningLine} />
             </div>
