@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import './App.css';
 
 function Square({ value, onSquareClick, isWinning }: { value: string | null; onSquareClick: () => void; isWinning: boolean }) {
