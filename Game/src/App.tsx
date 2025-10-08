@@ -22,9 +22,9 @@ function Board({ xIsNext, squares, onPlay, winningLine }: { xIsNext: boolean; sq
 
   return (
     <div className="board">
-      {Array(3).fill(null).map((_, row) => (
+      {Array(3).fill(null).map((_, row) => ( // vòng lặp ngoài
         <div key={row} className="board-row">
-          {Array(3).fill(null).map((_, col) => {
+          {Array(3).fill(null).map((_, col) => { // vòng lặp trong
             const index = row * 3 + col;
             return (
               <Square
