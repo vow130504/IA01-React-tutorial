@@ -104,8 +104,8 @@ export default function App() {
       <h1 className="main-title">Tic-Tac-Toe Game</h1>
       <div className="content-container">
         <div className="history-container">
-          <div className="history-header">
-            <h2>History</h2>
+          <h2 className="history-title">History</h2>
+          <div className="sort-btn-container">
             <button className="sort-btn" onClick={() => setIsAscending(!isAscending)}>
               {isAscending ? '↓ Desc' : '↑ Asc'}
             </button>
@@ -115,7 +115,9 @@ export default function App() {
         <div className="game-container">
           <div className="game-board">
             <div className="status">{`Next player: ${xIsNext ? 'X' : 'O'}`}</div>
-            <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} winningLine={winningLine} />
+            <div className="board-wrapper">
+              <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} winningLine={winningLine} />
+            </div>
             <button className="restart-btn" onClick={restartGame}>
               Restart Game
             </button>
